@@ -1,0 +1,53 @@
+<!-- Fayza Farah Project2021 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        Aquaponics - {% block title %}{% endblock %} | 2021
+    </title>
+    <meta charset="utf-8">
+    <!-- Favicon icon -->
+    <link rel="icon" href="/static/assets/images/favicon.ico" type="image/x-icon">
+    <!-- fontawesome icon -->
+    <link rel="stylesheet" href="/static/assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <!-- animation css -->
+    <link rel="stylesheet" href="/static/assets/plugins/animation/css/animate.min.css">
+    <!-- vendor css -->
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+
+    <!-- Specific CSS goes HERE -->
+    {% block stylesheets %}{% endblock stylesheets %}
+
+</head>
+
+<body>
+
+    <!-- [ Pre-loader ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>    
+    
+    <!-- Top Bar -->
+    {% include 'includes/navigation.html' %}
+
+    <!-- SideBar -->
+    {% include 'includes/sidebar.html' %}
+
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+
+            {% block content %}{% endblock content %}
+
+        </div>
+    </div>
+
+    {% include 'includes/scripts.html' %}
+
+    <!-- Specific Page JS goes HERE  -->
+    {% block javascripts %}{% endblock javascripts %}
+
+</body>
+</html>
