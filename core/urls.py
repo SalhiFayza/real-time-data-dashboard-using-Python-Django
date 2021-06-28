@@ -1,4 +1,4 @@
-#pfe2021 fayza+farah
+
 from django.contrib import admin
 from django.urls import path, include  # add this
 

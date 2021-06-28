@@ -1,0 +1,380 @@
+{% extends "layouts/base.html" %} {% block title %} Serial {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+
+<link
+  rel="stylesheet"
+  href="/static/assets/plugins/chart-morris/css/morris.css"
+/>
+
+{% endblock stylesheets %} {% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'font-awesome.css' %}" />
+    <script src="{% static 'bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/css/evo-calendar.min.css"/>
+  </head>
+  <body>
+    <div class="container">
+      <center><h1>Live Data from Arduino connected with the sensors</h1></center>
+      <hr/>
+
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-4"><label>Enter Com Port:</label></div>
+            <div class="col-md-4" >
+                <input   type="text" class="form-control col-md-2" name="com" id="comport">
+            </div>
+        <div class="col-md-4">
+          <input
+            value="Live Data from Arduino"
+            type="submit"
+            name="submit"
+            id="btn_show_chart1"
+            class="btn btn-primary"
+            
+          />
+        </div>
+      </div>
+
+      <br />
+      <hr />
+      <div class="row">
+        <div style="width: 100%" id="chartContainer1"></div>
+      </div>
+      <div style="margin-top: 40%" class="row">
+        <div style="width: 100%" id="chartContainer2"></div>
+      </div>
+      <div style="margin-top: 40%" class="row">
+        <div style="width: 100%" id="chartContainer3"></div>
+      </div>
+      <div style="margin-top: 40%" class="row">
+        <div style="width: 100%" id="chartContainer4"></div>
+      </div>
+    </div>
+  </body>
+
+  <script src="{% static 'jquery-3.3.1.min.js' %}"></script>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+  <script>
+    $("#btn_show_chart1").click(function () {
+      com=$("#comport").val();
+      fill_graph_sensor1(com);
+      fill_graph_sensor2(com);
+      fill_graph_sensor3(com);
+      fill_graph_sensor4(com);
+    });
+function fill_graph_sensor1() {
+      var dataPoints = [];
+      currentDate = new Date(), 
+  rangeChangedTriggered = false;
+var chart = new CanvasJS.Chart("chartContainer1", {
+  theme: "light2",
+	title: {
+    text: "Charts Humidity",
+    fontFamily: "arial black",
+		fontColor: "#FF6384"
+	},
+  axisX: {
+          title: "Time",
+
+        },
+        axisY: {
+       
+          title: "Humidity",
+          suffix: "%",
+          includeZero: true,
+          maximum : 100,
+        },
+	data: [{
+		type: "spline",
+    name: "CPU Utilization",
+    connectNullData: true,
+    color: "#FF6384",
+    xValueType: "dateTime",
+    xValueFormatString: "DD MMM hh:mm TT",
+    yValueFormatString: '#,##0.##"%"',
+		dataPoints: dataPoints
+	}]
+});
+
+      
+   
+updateData();
+
+// Initial Values
+var xValue = 0;
+var yValue = 10;
+var newDataCount = 6;
+var dataLength = 20; // number of dataPoints visible at any point
+var updateInterval = 900000; //miliseconds
+function addData(data) {
+  console.log(data.result);
+            var str_array = data.result[0].split(",");
+            console.log(str_array);
+            dataPoints.push({
+              x: Date.parse(str_array[1]),
+              y: Number(str_array[0]),
+            });
+            xValue++;
+            yValue = Number(str_array[0]);
+	newDataCount = 1;
+	chart.render();
+	setTimeout(updateData, updateInterval);
+}
+
+function updateData() {
+  $.ajax({
+          type: "get",
+          url: "{% url 'app:fetch_sensor_values_ajax_com' %}",
+          data: {
+                     'id': com
+                   },
+          success: function (data) {
+            addData(data);
+          },
+          error: function () {
+            console.log("error he ji");
+          },
+        });
+}
+  }
+    
+  function fill_graph_sensor2() {
+      var dataPoints = [];
+
+var chart = new CanvasJS.Chart("chartContainer2", {
+  theme: "light2",
+	title: {
+		text: "Charts Temperature ",
+          fontFamily: "arial black",
+		      fontColor: "#4BC0C0"
+	},
+  axisX: {
+          title: "Time",
+
+        },
+        axisY: {
+          title: "Temperature",
+          suffix: "°C",
+          viewportMinimum: -80,
+          viewportMaximum: 80
+          
+        },
+	data: [{
+		type: "spline",
+    name: "CPU Utilization",
+    connectNullData: true,
+    color: "#4BC0C0",
+    xValueType: "dateTime",
+    xValueFormatString: "DD MMM hh:mm TT",
+    yValueFormatString: '#,##0.##"°C"',
+		dataPoints: dataPoints
+	}]
+});
+updateData();
+
+// Initial Values
+var xValue = 0;
+var yValue = 10;
+var newDataCount = 6;
+var dataLength = 20; // number of dataPoints visible at any point
+var updateInterval = 900000; //miliseconds(15min)
+function addData(data) {
+  console.log(data.result);
+            var str_array = data.result[1].split(",");
+            console.log(str_array);
+            dataPoints.push({
+              x: Date.parse(str_array[1]),
+              y: Number(str_array[0]),
+            });
+            xValue++;
+            yValue = Number(str_array[0]);
+	newDataCount = 1;
+	chart.render();
+	setTimeout(updateData, updateInterval);
+}
+
+function updateData() {
+  $.ajax({
+          type: "get",
+          url: "{% url 'app:fetch_sensor_values_ajax_com' %}",
+          data: {
+                     'id': com
+                   },
+          success: function (data) {
+            addData(data);
+          },
+          error: function () {
+            console.log("error he ji");
+          },
+        });
+}
+  }
+    
+ 
+  
+  function fill_graph_sensor3() {
+      var dataPoints = [];
+
+var chart = new CanvasJS.Chart("chartContainer3", {
+  theme: "light3",
+	title: {
+		text: "Charts WaterTemp",
+          fontFamily: "arial black",
+		      fontColor: "#FFCE56"
+	},
+  axisX: {
+          title: "Time",
+
+        },
+        axisY: {
+          title: "WaterTemp",
+          suffix: "°C",
+          viewportMinimum: -170,
+          viewportMaximum: 170
+          
+        },
+	data: [{
+		type: "spline",
+    name: "CPU Utilization",
+    connectNullData: true,
+    color: "#FFCE56",
+    xValueType: "dateTime",
+    xValueFormatString: "DD MMM hh:mm TT",
+    yValueFormatString: '#,##0.##"°C"',
+		dataPoints: dataPoints
+	}]
+});
+updateData();
+
+// Initial Values
+var xValue = 0;
+var yValue = 10;
+var newDataCount = 6;
+var dataLength = 20; // number of dataPoints visible at any point
+var updateInterval = 900000; //miliseconds
+function addData(data) {
+  console.log(data.result);
+            var str_array = data.result[2].split(",");
+            console.log(str_array);
+            dataPoints.push({
+              x: Date.parse(str_array[1]),
+              y: Number(str_array[0]),
+            });
+            xValue++;
+            yValue = Number(str_array[0]);
+	newDataCount = 1;
+	chart.render();
+	setTimeout(updateData, updateInterval);
+}
+
+function updateData() {
+  $.ajax({
+          type: "get",
+          url: "{% url 'app:fetch_sensor_values_ajax_com' %}",
+          data: {
+                     'id': com
+                   },
+          success: function (data) {
+            addData(data);
+          },
+          error: function () {
+            console.log("error he ji");
+          },
+        });
+}
+  }
+    
+  function fill_graph_sensor4() {
+      var dataPoints = [];
+
+var chart = new CanvasJS.Chart("chartContainer4", {
+  theme: "light4",
+	title: {
+		text: "Charts pH",
+    fontFamily: "arial black",
+		fontColor: "#36A2EB"
+	},
+  axisX: {
+          title: "Time",
+
+        },
+        axisY: {
+          title: "pH",
+          suffix: "",
+          includeZero: true,
+          maximum : 15,
+          
+        },
+	data: [{
+		type: "spline",
+    name: "CPU Utilization",
+    connectNullData: true,
+    color: "#36A2EB",
+    xValueType: "dateTime",
+    xValueFormatString: "DD MMM hh:mm TT",
+    yValueFormatString: '#,##0.##""',
+		dataPoints: dataPoints
+	}]
+});
+updateData();
+
+// Initial Values
+var xValue = 0;
+var yValue = 10;
+var newDataCount = 6;
+var dataLength = 20; // number of dataPoints visible at any point
+var updateInterval = 900000; //miliseconds
+function addData(data) {
+  console.log(data.result);
+            var str_array = data.result[3].split(",");
+            console.log(str_array);
+            dataPoints.push({
+              x: Date.parse(str_array[1]),
+              y: Number(str_array[0]),
+            });
+            xValue++;
+            yValue = Number(str_array[0]);
+	newDataCount = 1;
+	chart.render();
+	setTimeout(updateData, updateInterval);
+}
+
+function updateData() {
+  $.ajax({
+          type: "get",
+          url: "{% url 'app:fetch_sensor_values_ajax_com' %}",
+          data: {
+                     'id': com
+                   },
+          success: function (data) {
+            addData(data);
+          },
+          error: function () {
+            console.log("error he ji");
+          },
+        });
+}
+  }
+    
+ 
+  </script>
+</html>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<script src="/static/assets/plugins/chart-morris/js/raphael.min.js"></script>
+<script src="/static/assets/plugins/chart-morris/js/morris.min.js"></script>
+<script src="/static/assets/js/pages/chart-morris-custom.js"></script>
+
+{% endblock javascripts %}

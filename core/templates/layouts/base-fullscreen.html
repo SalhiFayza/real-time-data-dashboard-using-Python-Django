@@ -1,6 +1,11 @@
+{% if message %}
+<script>
+    alert('{{ message }}');
+</script>
+{% endif %}
 <!DOCTYPE html>
 <html lang="en">
-<!--pfe2021 faza+farah-->
+
 <head>
     <title>
         Aquaponics - {% block title %}{% endblock %} | 2021 
@@ -8,7 +13,7 @@
 
     <meta charset="utf-8">
    
-
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/css/evo-calendar.min.css"/>
     <!-- Favicon icon -->
     <link rel="icon" href="/static/assets/images/favicon.ico" type="image/x-icon">
     <!-- fontawesome icon -->

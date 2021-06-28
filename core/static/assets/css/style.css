@@ -1,6 +1,9 @@
 /**======================================================================
 =========================================================================
-<!--pfe2021 faza+farah-->
+Template Name: Datta Able Admin Template
+Author: Codedthemes
+supports: https://codedthemes.support-hub.io/
+File: style.css
 =========================================================================
 =========================================================================
   == Table of Contents==
@@ -47,7 +50,8 @@
      Google Font
 ==========================  **/
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600");
-
+@import url("../plugins/bootstrap/css/bootstrap.min.css");
+@import url("../fonts/feather/css/feather.css");
 @import url("../plugins/jquery-scrollbar/css/jquery.scrollbar.min.css");
 @import url("../fonts/datta/datta-icon.css");
 /**  =====================
@@ -10594,3 +10598,4 @@ div.code-toolbar > .toolbar span:hover {
 		box-shadow: 0 0 0 0 rgba(4, 169, 245, 0)
 	}
 }
+

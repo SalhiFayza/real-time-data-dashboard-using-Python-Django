@@ -1,4 +1,4 @@
-/*! <!--pfe2021 faza+farah--> */
+
 
 (function( factory ) {
 	if ( typeof define === "function" && define.amd ) {

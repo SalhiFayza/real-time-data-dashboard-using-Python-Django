@@ -1,118 +1,571 @@
-{% extends "layouts/base.html" %}
-<!--pfe2021 faza+farah-->
-{% block title %} Charts {% endblock %} 
+{% extends "layouts/base.html" %} {% block title %} Charts {% endblock %}
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}
 
-    <link rel="stylesheet" href="/static/assets/plugins/chart-morris/css/morris.css">
+<link
+  rel="stylesheet"
+  href="/static/assets/plugins/chart-morris/css/morris.css"
+/>
 
-{% endblock stylesheets %}
+{% endblock stylesheets %} {% block content %}
 
-{% block content %}
-
-<div class="pcoded-content">
-    <div class="pcoded-inner-content">
-        <!-- [ breadcrumb ] start -->
-        <div class="page-header">
-            <div class="page-block">
-                <div class="row align-items-center">
-                    <div class="col-md-12">
-                        <div class="page-header-title">
-                            <h5 class="m-b-10">Data Charts</h5>
-                        </div>
-                        <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="javascript:">Charts</a></li>
-                            <li class="breadcrumb-item"><a href="javascript:">Basic Charts</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- [ breadcrumb ] end -->
-        <div class="main-body">
-            <div class="page-wrapper">
-                <!-- [ Main Content ] start -->
-                <div class="row">
-                    <!-- [ Morris Chart ] start -->
-                    <div class="col-xl-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Bar [ Simple ] Chart</h5>
-                            </div>
-                            <div class="card-block">
-                                <div id="morris-bar-chart" style="height:300px"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Bar [ Stacked ] Chart</h5>
-                            </div>
-                            <div class="card-block">
-                                <div id="morris-bar-stacked-chart" style="height:300px"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Line [ Angle ] Chart</h5>
-                            </div>
-                            <div class="card-block">
-                                <div id="morris-area-chart" style="height:300px"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Area [ Smooth ] Chart</h5>
-                            </div>
-                            <div class="card-block">
-                                <div id="morris-area-curved-chart" style="height:300px"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Line [ Angle ] Chart</h5>
-                            </div>
-                            <div class="card-block">
-                                <div id="morris-line-chart" class="ChartShadow" style="height:300px"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Line [ Smooth ] Chart</h5>
-                            </div>
-                            <div class="card-block">
-                                <div id="morris-line-smooth-chart" class="ChartShadow" style="height:300px"></div>
-                            </div>
-                        </div>
-                    </div>
-                 
-                </div>
-           
-            </div>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'font-awesome.css' %}" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/css/evo-calendar.min.css"/>
+    <script src="{% static 'bootstrap.min.js' %}"></script>
+  </head>
+  <body onload="load()">
+    
+    <div class="container">
+      <center><h1 >Live Data</h1></center>
+      <br />
+      <hr />
+      <form action="#" >
+        {% csrf_token %}
+      <div class="row">
+        <div style="width: 100%" id="chartContainer1"></div>
+      </div>
+    </form>
+    <form action="#" >
+      {% csrf_token %}
+      <div style="margin-top: 40%;" class="row">
+        <div style="width: 100%" id="chartContainer2"></div>
+      </div>
+    </form>
+    <form action="#" >
+        {% csrf_token %}
+      <div style="margin-top: 40%" class="row">
+        <div style="width: 100%" id="chartContainer3"></div>
+      </div>
+    </form>
+    <form action="#" >
+              {% csrf_token %}
+      <div style="margin-top: 40%" class="row">
+        <div style="width: 100%" id="chartContainer4"></div>
+      </div>
+    </form>
     </div>
-</div>
+  </body>
 
+  <script src="{% static 'jquery-3.3.1.min.js' %}"></script>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+  <script>
+    const datesAreOnSameDay = (first, second) =>
+    first.getFullYear() === second.getFullYear() &&
+    first.getMonth() === second.getMonth() &&
+    first.getDate() === second.getDate();
+    function load(){
+      
+      $.ajax({
+          type: "GET",
+          url: "{% url 'app:get_last_date' %}",
+          success: function (data) {
+            console.log("data 1 : "+data);
+            var date1 = new Date(data);
+            var date2=new Date();
+            if(datesAreOnSameDay(date1, date2)){
+              $.ajax({
+          type: "GET",
+          url: "{% url 'app:get_data_aquaponics_Humidity' %}",
+          success: function (data) {
+            var dps = JSON.parse(data['data']);
+            console.log("dps 1 : "+JSON.stringify(dps) );
+            fill_graph_sensor1(dps,data['id']);
+          },
+          error: function () {
+            fill_graph_sensor1(null,null);
+          },
+        });
+        $.ajax({
+          type: "GET",
+          url: "{% url 'app:get_data_aquaponics_Temperature' %}",
+          success: function (data) {
+            var dps = JSON.parse(data['data']);
+            console.log("dps 2 : "+JSON.stringify(dps) );
+            fill_graph_sensor2(dps,data['id']);
+          },
+          error: function () {
+            var dps=[];
+            fill_graph_sensor2(null,null);
+          },
+        });
+        $.ajax({
+          type: "GET",
+          url: "{% url 'app:get_data_aquaponics_WaterTemp' %}",
+          success: function (data) {
+            var dps = JSON.parse(data['data']);
+            console.log("dps 3 : "+JSON.stringify(dps) );
+            fill_graph_sensor3(dps,data['id']);
+          },
+          error: function () {
+            var dps=[];
+            fill_graph_sensor3(null,null);
+          },
+        });
+        $.ajax({
+          type: "GET",
+          url: "{% url 'app:get_data_aquaponics_pH' %}",
+          success: function (data) {
+            var dps = JSON.parse(data['data']);
+            console.log("dps 4 : "+JSON.stringify(dps) );
+            fill_graph_sensor4(dps,data['id']);
+          },
+          error: function () {
+          
+            fill_graph_sensor4(null,null);
+          },
+        });
+            }else{
+            fill_graph_sensor1(null,null);
+            fill_graph_sensor2(null,null);
+            fill_graph_sensor3(null,null);
+            fill_graph_sensor4(null,null);
+            }
+          },
+          error: function () {
+            fill_graph_sensor1(null,null);
+            fill_graph_sensor2(null,null);
+            fill_graph_sensor3(null,null);
+            fill_graph_sensor4(null,null);
+          },
+        });
+     
+    }
+    function fill_graph_sensor1(dps,id) {
+      // Initial Values
+      if(dps==null)dps=[];
+      var chart = new CanvasJS.Chart("chartContainer1", {
+        theme: "light1",
+        title: {
+          text: "Charts Humidity",
+          fontFamily: "arial black",
+		      fontColor: "#FF6384"
+        },
+        axisX: {
+          title: "Time",
+         
+        },
+        axisY: {
+          title: "Humidity",
+          suffix: "%",
+          includeZero: true,
+          
+          maximum : 100,
+        },
+        data: [
+          {
+            type: "spline",
+            name: "CPU Utilization",
+            connectNullData: true,
+            color: "#FF6384",
+            xValueType: "dateTime",
+            xValueFormatString: "DD MMM hh:mm TT",
+            yValueFormatString: '#,##0.##"%"',
+            dataPoints: dps
+          }
+        ]
+      });
+      
+      var xValue = 0;
+      var yValue = 10;
+      let d;
+      var date_format_str;
+      var updateInterval = 900000; //miliseconds
+      var dataLength = 20; // number of dataPoints visible at any point
+      var newDataCount = 6;
+      var first=false;
+      var fin;
+      updateChart();
+
+      function addData(data) {
+                 
+            var str_array = data[0].split(",");
+            if(!first){
+              fin = new Date(Date.parse(str_array[1]));
+               d = new Date();
+               date_format_str = ((d.getMonth()+1).toString().length==2?(d.getMonth()+1).toString():"0"+(d.getMonth()+1).toString())+"/"+(d.getDate().toString().length==2?d.getDate().toString():"0"+d.getDate().toString())+"/"+(d.getFullYear().toString());
+              fin.setMinutes(fin.setMinutes() + 10);
+              first=true;
+            }
+            dps.push({
+              x: Date.parse(str_array[1]),
+              y: Number(str_array[0]),
+            });
+            xValue++;
+            yValue = Number(str_array[0]);
+	newDataCount = 1;
+	chart.render();
+  //if(new Date(Date.parse(str_array[1])).getMinutes()==fin.getMinutes()){
+    if(id!=null){
+      var dt=new Date(id);
+          var now=new Date();
+          dt.setMinutes(dt.getMinutes()+15);
+          if(+dt <= +now){
+            $.ajax({
+                        method: "POST",
+                        url: "{% url 'app:data_aquaponics_Humidity' %}",
+                        data: {
+                          id:d.getTime(),
+                          data:JSON.stringify(dps),
+                          date:date_format_str,
+                          type:"Humidity",
+                          csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+                        }
+                        ,
+          success: function (data) {
+            //console.log(data);
+          },
+          error: function () {
+            console.log("error he ji");
+          },
+        });
+      }
+    }
+    
+      setTimeout(updateChart, updateInterval);
+}
+        function updateChart() {
+          
+            $.ajax({
+          type: "get",
+          url: "{% url 'app:fetch_sensor_values_ajax_firebase' %}",
+          success: function (data) {
+           addData(data);
+          },
+          error: function () {
+            console.log("error he ji");
+          },
+        });
+        
+      }
+      
+    }
+    function fill_graph_sensor2(dps,id) {
+      if(dps==null)dps=[];
+      var chart = new CanvasJS.Chart("chartContainer2", {
+        theme: "light2",
+        title: {
+          text: "Charts Temperature ",
+          fontFamily: "arial black",
+		      fontColor: "#4BC0C0"
+        },
+        axisX: {
+          title: "Time",
+        },
+        axisY: {
+          title: "Temperature",
+          suffix: "°C",
+          viewportMinimum: -80,
+          viewportMaximum: 80
+        },
+        data: [
+          {
+            type: "spline",
+            name: "CPU Utilization",
+            connectNullData: true,
+            color: "#4BC0C0",
+            xValueType: "dateTime",
+            xValueFormatString: "DD MMM hh:mm TT",
+            yValueFormatString: '#,##0.##"°C"',
+            dataPoints: dps
+          }
+        ]
+      });
+      updateChart();
+// Initial Values
+var xValue = 0;
+      var yValue = 10;
+      let d;
+      var date_format_str;
+      var updateInterval = 900000; //miliseconds
+      var dataLength = 20; // number of dataPoints visible at any point
+      var newDataCount = 6;
+      var first=false;
+      var fin;
+      updateChart();
+
+      function addData(data) {
+                 
+            var str_array = data[1].split(",");
+            if(!first){
+              fin = new Date(Date.parse(str_array[1]));
+               d = new Date();
+               date_format_str = ((d.getMonth()+1).toString().length==2?(d.getMonth()+1).toString():"0"+(d.getMonth()+1).toString())+"/"+(d.getDate().toString().length==2?d.getDate().toString():"0"+d.getDate().toString())+"/"+(d.getFullYear().toString());
+              fin.setMinutes(fin.setMinutes() + 10);
+              first=true;
+            }
+            dps.push({
+              x: Date.parse(str_array[1]),
+              y: Number(str_array[0]),
+            });
+            xValue++;
+            yValue = Number(str_array[0]);
+	newDataCount = 1;
+	chart.render();
+  if(id!=null){
+  var dt=new Date(id);
+          var now=new Date();
+          dt.setMinutes(dt.getMinutes()+15);
+          if(+dt <= +now){
+  $.ajax({
+                        method: "POST",
+                        url: "{% url 'app:data_aquaponics_Temperature' %}",
+                        data: {
+                          id:d.getTime(),
+                          data:JSON.stringify(dps),
+                          date:date_format_str,
+                          type:"Temperature",
+                          csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+                        }
+                        ,
+          success: function (data) {
+            //console.log(data);
+          },
+          error: function () {
+            console.log("error he ji");
+          },
+        });
+      }
+    }
+	setTimeout(updateChart, updateInterval);
+}
+        function updateChart() {
+        $.ajax({
+          type: "get",
+          url: "{% url 'app:fetch_sensor_values_ajax_firebase' %}",
+
+          success: function (data) {
+           addData(data);
+          },
+          error: function () {
+            console.log("error he ji");
+          },
+        });
+      }
+    }
+    function fill_graph_sensor3(dps,id) {
+      if(dps==null)dps=[];
+      var chart = new CanvasJS.Chart("chartContainer3", {
+        theme: "light3",
+        title: {
+          text: "Charts WaterTemp",
+          fontFamily: "arial black",
+		      fontColor: "#FFCE56"
+        },
+        axisX: {
+          title: "Time",
+        },
+        axisY: {
+          title: "WaterTemp",
+          suffix: "°C",
+          viewportMinimum: -170,
+          viewportMaximum: 170
+        },
+        data: [
+          {
+            type: "spline",
+            name: "CPU Utilization",
+            connectNullData: true,
+            color: "#FFCE56",
+            xValueType: "dateTime",
+            xValueFormatString: "DD MMM hh:mm TT",
+            yValueFormatString: '#,##0.##"°C"',
+            dataPoints: dps
+          }
+        ]
+      });
+      updateChart();
+// Initial Values
+var xValue = 0;
+      var yValue = 10;
+      let d;
+      var date_format_str;
+      var updateInterval = 900000; //miliseconds
+      var dataLength = 20; // number of dataPoints visible at any point
+      var newDataCount = 6;
+      var first=false;
+      var fin;
+      updateChart();
+
+      function addData(data) {
+                 
+            var str_array = data[2].split(",");
+            if(!first){
+              fin = new Date(Date.parse(str_array[1]));
+               d = new Date();
+               date_format_str = ((d.getMonth()+1).toString().length==2?(d.getMonth()+1).toString():"0"+(d.getMonth()+1).toString())+"/"+(d.getDate().toString().length==2?d.getDate().toString():"0"+d.getDate().toString())+"/"+(d.getFullYear().toString());
+              fin.setMinutes(fin.setMinutes() + 10);
+              first=true;
+            }
+            dps.push({
+              x: Date.parse(str_array[1]),
+              y: Number(str_array[0]),
+            });
+            xValue++;
+            yValue = Number(str_array[0]);
+	newDataCount = 1;
+	chart.render();
+  if(id!=null){
+  var dt=new Date(id);
+          var now=new Date();
+          dt.setMinutes(dt.getMinutes()+15);
+          if(+dt <= +now){
+          $.ajax({
+                        method: "POST",
+                        url: "{% url 'app:data_aquaponics_WaterTemp' %}",
+                        data: {
+                          id:d.getTime(),
+                          data:JSON.stringify(dps),
+                          date:date_format_str,
+                          type:"WaterTemp",
+                          csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+                        }
+                        ,
+          success: function (data) {
+            //console.log(data);
+          },
+          error: function () {
+            console.log("error he ji");
+          },
+        });
+      }
+    }
+	setTimeout(updateChart, updateInterval);
+}
+        function updateChart() {
+        $.ajax({
+          type: "get",
+          url: "{% url 'app:fetch_sensor_values_ajax_firebase' %}",
+
+          success: function (data) {
+           addData(data);
+          },
+          error: function () {
+            console.log("error he ji");
+          },
+        });
+      }
+    }
+    function fill_graph_sensor4(dps,id) {
+      if(dps==null)dps=[];
+      var chart = new CanvasJS.Chart("chartContainer4", {
+        theme: "light4",
+        title: {
+          text: "Charts pH",
+    fontFamily: "arial black",
+		fontColor: "#36A2EB"
+        },
+        axisX: {
+          title: "Time",
+        },
+        axisY: {
+          title: "pH",
+          suffix: "",
+          includeZero: true,
+          maximum : 15,
+        },
+        data: [
+          {
+            type: "spline",
+            name: "CPU Utilization",
+            connectNullData: true,
+            color: "#36A2EB",
+            xValueType: "dateTime",
+            xValueFormatString: "DD MMM hh:mm TT",
+            yValueFormatString: '#,##0.##""',
+            dataPoints: dps
+          }
+        ]
+      });
+      
+// Initial Values
+var xValue = 0;
+      var yValue = 10;
+      let d;
+      var date_format_str;
+      var updateInterval = 900000; //miliseconds
+      var dataLength = 20; // number of dataPoints visible at any point
+      var newDataCount = 6;
+      var first=false;
+      var fin;
+      updateChart();
+
+      function addData(data) {
+             //console.log("FFFFFFFFFFF :"+data);
+            var str_array = data[3].split(",");
+            if(!first){
+              fin = new Date(Date.parse(str_array[1]));
+               d = new Date();
+              date_format_str = ((d.getMonth()+1).toString().length==2?(d.getMonth()+1).toString():"0"+(d.getMonth()+1).toString())+"/"+(d.getDate().toString().length==2?d.getDate().toString():"0"+d.getDate().toString())+"/"+(d.getFullYear().toString());
+              fin.setMinutes(fin.setMinutes() + 10);
+              first=true;
+            }
+            dps.push({
+              x: Date.parse(str_array[1]),
+              y: Number(str_array[0]),
+            });
+            xValue++;
+            yValue = Number(str_array[0]);
+	newDataCount = 1;
+	chart.render();
+  if(id!=null){
+  var dt=new Date(id);
+          var now=new Date();
+          dt.setMinutes(dt.getMinutes()+15);
+          if(+dt <= +now){
+  $.ajax({
+                        method: "POST",
+                        url: "{% url 'app:data_aquaponics_pH' %}",
+                        data: {
+                          id:d.getTime(),
+                          data:JSON.stringify(dps),
+                          date:date_format_str,
+                          type:"pH",
+                          csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+                        }
+                        ,
+          success: function (data) {
+            //console.log(data);
+          },
+          error: function () {
+            console.log("error he ji");
+          },
+        });
+      }
+    }
+	setTimeout(updateChart, updateInterval);
+}
+        function updateChart() {
+        $.ajax({
+          type: "get",
+          url: "{% url 'app:fetch_sensor_values_ajax_firebase' %}",
+
+          success: function (data) {
+           addData(data);
+          },
+          error: function () {
+            console.log("error he ji");
+          },
+        });
+      }
+    }
+  </script>
+</html>
 
 {% endblock content %}
-
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
 
-    <script src="/static/assets/plugins/chart-morris/js/raphael.min.js"></script>
-    <script src="/static/assets/plugins/chart-morris/js/morris.min.js"></script>
-    <script src="/static/assets/js/pages/chart-morris-custom.js"></script>
+<script src="/static/assets/plugins/chart-morris/js/raphael.min.js"></script>
+<script src="/static/assets/plugins/chart-morris/js/morris.min.js"></script>
+<script src="/static/assets/js/pages/chart-morris-custom.js"></script>
 
 {% endblock javascripts %}

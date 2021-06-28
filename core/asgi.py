@@ -1,4 +1,4 @@
-#pfe2021 faza+farah
+
 import os
 
 from django.core.asgi import get_asgi_application
