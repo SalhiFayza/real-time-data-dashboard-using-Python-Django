@@ -19,7 +19,7 @@ path('fetch_sensor_values_ajax_firebase', views.fetch_sensor_values_ajax_firebas
     path('data_aquaponics_Temperature', views.data_aquaponics_Temperature, name='data_aquaponics_Temperature'),
     path('data_aquaponics_WaterTemp', views.data_aquaponics_WaterTemp, name='data_aquaponics_WaterTemp'),
     path('data_aquaponics_pH', views.data_aquaponics_pH, name='data_aquaponics_pH'),
-
+    path('getname', views.getname, name='getname'),
     path('get_data_aquaponics_Humidity', views.get_data_aquaponics_Humidity, name='get_data_aquaponics_Humidity'),
     path('get_data_aquaponics_Temperature', views.get_data_aquaponics_Temperature, name='get_data_aquaponics_Temperature'),
     path('get_data_aquaponics_WaterTemp', views.get_data_aquaponics_WaterTemp, name='get_data_aquaponics_WaterTemp'),

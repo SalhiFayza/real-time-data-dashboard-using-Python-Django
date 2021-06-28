@@ -19,6 +19,8 @@ import plotly.graph_objs as go
 import cufflinks as cf
 import  plotly.offline as opy
 import time
+from .forms import NameForm
+
 @login_required(login_url="/login/")
 def index(request):
     aa = firebase.FirebaseApplication(
@@ -61,6 +63,7 @@ def pages(request):
 
 def show_graph(request, template_name='charts-morris.html'):
     return render(request, template_name)
+#******************************** for serial arduino
 def show_graph_com(request, template_name='live.html'):
     return render(request, template_name)
 def fetch_sensor_values_ajax_com(request):
@@ -92,6 +95,7 @@ def fetch_sensor_values_ajax_com(request):
     else:
         data['result']='Not Ajax'
     return JsonResponse(data)
+#********************************************************************************************    
 def fetch_sensor_values_ajax_firebase(request):
     data = {}
     if request.is_ajax():
@@ -425,3 +429,17 @@ def read(request):
         return JsonResponse(data)
 
         
+def getname(request, template_name='settings.html'):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = NameForm(request.POST)
+        itemValue = form['temp'].value()
+        from firebase import firebase
+        aa = firebase.FirebaseApplication(
+                        'https://aquaponicsapp-d4dda-default-rtdb.firebaseio.com/', None)
+        Result = aa.put('/temp/', 'data', itemValue)
+        #Result = aa.put('/temp/', 'data')
+
+        print(Result)
+        return render(request, template_name)
