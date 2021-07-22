@@ -153,4 +153,4 @@ This interface displays the different curves of aquaponics data (humidity, tempe
 ![94](https://user-images.githubusercontent.com/60444937/126654066-7844f593-8440-494a-b558-0d883c7672c7.PNG)
 ![95](https://user-images.githubusercontent.com/60444937/126654082-dff74bf4-329c-4292-937b-f0b225b824c8.PNG)
 ![96](https://user-images.githubusercontent.com/60444937/126654103-d7fa1926-f518-4815-9a0d-64bd69beef23.PNG)
-![97](https://user-images.githubusercontent.com/60444937/126654115-c21c6cb0-1bbe-42ee-9ac5-5e052430ff96.PNG)
+![5](https://user-images.githubusercontent.com/60444937/126654662-95d792a4-c989-4ba2-bc44-d77b60f7541d.PNG)
