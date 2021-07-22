@@ -32,7 +32,7 @@ def index(request):
 @login_required(login_url="/login/")
 def infos(request):
     aa = firebase.FirebaseApplication(
-        'https://aquaponicsapp-d4dda-default-rtdb.firebaseio.com/', None)
+        '***************************************', None)
     result = aa.get('/DATA/', '')
     return render(request, 'info.html', {'result': result})
 
@@ -105,7 +105,7 @@ def fetch_sensor_values_ajax_firebase(request):
         try:
             print("trying to fetch \n")
             aa = firebase.FirebaseApplication(
-                'https://aquaponicsapp-d4dda-default-rtdb.firebaseio.com/', None)
+                '******************************', None)
             result = aa.get('/DATA/', '')
             now = datetime.now()
             ok_date = str(now.strftime('%Y-%m-%d %H:%M:%S'))
