@@ -43,11 +43,11 @@ Dashboard (local website) to constitute and display the data of the sensors on t
 
 # Create Account Firebase.
 
--Create account 
+- Create account 
 
--Create project
+- Create project
 
--Link  a Project-Firebase for your Project Django:
+- Link  a Project-Firebase for your Project Django:
 
 with code configiration:
 
@@ -73,4 +73,32 @@ const firebaseConfig = {
   
 };
 
--add the code conf in <scripts></scripts> or in the views.py or in the file JSON.
+- add the code conf in <scripts></scripts> or in the views.py or in the file JSON.
+
+# GET-POST Data RealTime Firebase and Serial
+
+- how to plot live/real-time graphs using python from Arduino connected with any sensors and display in web applications(Django).
+
+- how to plot live/real-time graphs using python from Firebase connected with data and display in web applications(Django).
+
+- Using Ajax: is a method using different technologies added to web browsers.
+
+- AJAX(asynchronous JavaScript and XML ).
+
+- Libs Using:
+asgiref==3.2.3
+certifi==2019.11.28
+chardet==3.0.4
+dj-database-url==0.5.0
+Django==3.0.1
+django-heroku==0.3.1
+gunicorn==20.0.4
+heroku==0.1.4
+idna==2.8
+psycopg2==2.8.4
+python-dateutil==1.5
+pytz==2019.3
+requests==2.22.0
+sqlparse==0.3.0
+urllib3==1.25.7
+whitenoise==5.0.1
