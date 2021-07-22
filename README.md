@@ -1,5 +1,5 @@
 # real-time-data-dashboard-using-Python-Django
-Dashboard (local website) to constitute and display the data of the sensors on the interfaces in the form of values and curves.
+Web server using an "Arduino UNO+Raspberry Pi" and DHT22, DS18B20, Pro SKU SEN0169 sensors to graph the data in my Aquaponics over time. The data can be accessed over a web browser.
 # USING:
 - Software: VSCode.
 - Language: back-end and front-end: Python, Django, Ajax, HTML, CSS, JavaScript, Bootstrap.
@@ -104,6 +104,12 @@ urllib3==1.25.7
 whitenoise==5.0.1
 
 # Local SiteWeb
+
+Here I use an (Arduino UNO+Raspberry Pi) and a DHT22, DS18B20, Pro SKU SEN0169 sensors, combined with a python virtual environment and SQLite, to store data from my Aquaponics and display it in a web server.
+
+I use Django and AJAX for the Django webserver. 
+Python and Ajax to take data Firebase and store the data in an SQLite database. I also include a link to Plotly.
+
 * Form data in Firebase: Overview of the web application:
 
 ![image](https://user-images.githubusercontent.com/60444937/126646168-47730218-a06a-40ef-be8b-dadd420305e8.png)
@@ -114,8 +120,9 @@ whitenoise==5.0.1
 
 * Part 2: Data Firebase(Home):
 
-
 ![92](https://user-images.githubusercontent.com/60444937/126647540-1fc1e97d-e90b-4931-9bbd-ff7c6854e1d2.PNG)
+
+* Part 3: Data SQLite(DB Django):
 
 
 
