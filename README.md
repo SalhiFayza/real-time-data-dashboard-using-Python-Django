@@ -104,8 +104,8 @@ urllib3==1.25.7
 whitenoise==5.0.1
 
 # Local SiteWeb
-***Form data in Firebase: Overview of the web application:
+* Form data in Firebase: Overview of the web application:
 
 ![image](https://user-images.githubusercontent.com/60444937/126646168-47730218-a06a-40ef-be8b-dadd420305e8.png)
 
-Part 1: Authentification with SQLite(data base Django). 
+* Part 1: Authentification with SQLite(data base Django). 
