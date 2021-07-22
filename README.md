@@ -140,7 +140,5 @@ To access the curves for a specific date, simply click in the calendar displayed
 
 (3):
 
-![9](https://user-images.githubusercontent.com/60444937/126652509-1f5440dd-806a-4643-ad50-d1e8ef84d361.PNG)
-![10](https://user-images.githubusercontent.com/60444937/126652551-562b6ee6-cfab-4777-98f5-7b50be26b9be.PNG)
-![11](https://user-images.githubusercontent.com/60444937/126652567-3e1dd2a5-d86d-4a25-ae22-6b2a9cf33605.PNG)
-![12](https://user-images.githubusercontent.com/60444937/126652593-7746571d-471f-4667-81b9-770b4d465646.PNG)
+![9](https://user-images.githubusercontent.com/60444937/126652509-1f5440dd-806a-4643-ad50-d1e8ef84d361.PNG)![10](https://user-images.githubusercontent.com/60444937/126652551-562b6ee6-cfab-4777-98f5-7b50be26b9be.PNG)
+![11](https://user-images.githubusercontent.com/60444937/126652567-3e1dd2a5-d86d-4a25-ae22-6b2a9cf33605.PNG)![12](https://user-images.githubusercontent.com/60444937/126652593-7746571d-471f-4667-81b9-770b4d465646.PNG)
