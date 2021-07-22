@@ -24,7 +24,7 @@ from .forms import NameForm
 @login_required(login_url="/login/")
 def index(request):
     aa = firebase.FirebaseApplication(
-        'https://aquaponicsapp-d4dda-default-rtdb.firebaseio.com/', None)
+        '***************************************', None)
     result = aa.get('/DATA/', '')
     return render(request, 'index.html', {'result': result})
 
@@ -437,7 +437,7 @@ def getname(request, template_name='settings.html'):
         itemValue = form['temp'].value()
         from firebase import firebase
         aa = firebase.FirebaseApplication(
-                        'https://aquaponicsapp-d4dda-default-rtdb.firebaseio.com/', None)
+                        '********************************', None)
         Result = aa.put('/temp/', 'data', itemValue)
         #Result = aa.put('/temp/', 'data')
 
