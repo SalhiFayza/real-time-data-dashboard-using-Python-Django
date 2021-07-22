@@ -118,11 +118,29 @@ Python and Ajax to take data Firebase and store the data in an SQLite database. 
 
 ![90](https://user-images.githubusercontent.com/60444937/126646643-703fe89e-12b1-4cd4-acb7-666d6b1fb06a.PNG)![91](https://user-images.githubusercontent.com/60444937/126646628-2ce52d36-41cd-4e55-aa1f-b4a17d8a417c.PNG)
 
-* Part 2: Data Firebase(Home):
+* Part 2: Data Firebase"Home":
 
 ![92](https://user-images.githubusercontent.com/60444937/126647540-1fc1e97d-e90b-4931-9bbd-ff7c6854e1d2.PNG)
 
-* Part 3: Data SQLite(DB Django):
+* Part 3: Data SQLite(DB Django)"Data":
 
+Interface of stored curves.
 
+In this interface, storing aquaponics data in the Django database and displaying it as curves.
 
+To access the curves for a specific date, simply click in the calendar displayed in the interface and choose the desired date and the curves will be displayed as shown in the following figure.
+
+(1):
+
+![ttttttttttttttttttttt](https://user-images.githubusercontent.com/60444937/126651331-cd06ceec-3fb6-45bf-8de1-32efaf0a0ef1.PNG)
+
+(2):
+
+![6](https://user-images.githubusercontent.com/60444937/126652310-a36bcab4-f613-4ff3-84a7-6a9c500c7d33.PNG)
+
+(3):
+
+![9](https://user-images.githubusercontent.com/60444937/126652509-1f5440dd-806a-4643-ad50-d1e8ef84d361.PNG)
+![10](https://user-images.githubusercontent.com/60444937/126652551-562b6ee6-cfab-4777-98f5-7b50be26b9be.PNG)
+![11](https://user-images.githubusercontent.com/60444937/126652567-3e1dd2a5-d86d-4a25-ae22-6b2a9cf33605.PNG)
+![12](https://user-images.githubusercontent.com/60444937/126652593-7746571d-471f-4667-81b9-770b4d465646.PNG)
