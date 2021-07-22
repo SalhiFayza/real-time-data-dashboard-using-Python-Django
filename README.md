@@ -136,8 +136,21 @@ To access the curves for a specific date, simply click in the calendar displayed
 
 (2):
 
-![6](https://user-images.githubusercontent.com/60444937/126652310-a36bcab4-f613-4ff3-84a7-6a9c500c7d33.PNG)
-
+ ![9548](https://user-images.githubusercontent.com/60444937/126653841-fb3237b6-343f-4306-920d-a11027068ec3.PNG)
+ 
 (3):
 
+![6](https://user-images.githubusercontent.com/60444937/126652310-a36bcab4-f613-4ff3-84a7-6a9c500c7d33.PNG)
+
+(4):
+
 ![9](https://user-images.githubusercontent.com/60444937/126652509-1f5440dd-806a-4643-ad50-d1e8ef84d361.PNG)![10](https://user-images.githubusercontent.com/60444937/126652551-562b6ee6-cfab-4777-98f5-7b50be26b9be.PNG)![11](https://user-images.githubusercontent.com/60444937/126652567-3e1dd2a5-d86d-4a25-ae22-6b2a9cf33605.PNG)![12](https://user-images.githubusercontent.com/60444937/126652593-7746571d-471f-4667-81b9-770b4d465646.PNG)
+
+* Part 3: Data Firebase"Charts for data firebase":
+
+This interface displays the different curves of aquaponics data (humidity, temperature, water temperature and pH) using the Firebased database as shown in the following figures:
+
+![94](https://user-images.githubusercontent.com/60444937/126654066-7844f593-8440-494a-b558-0d883c7672c7.PNG)
+![95](https://user-images.githubusercontent.com/60444937/126654082-dff74bf4-329c-4292-937b-f0b225b824c8.PNG)
+![96](https://user-images.githubusercontent.com/60444937/126654103-d7fa1926-f518-4815-9a0d-64bd69beef23.PNG)
+![97](https://user-images.githubusercontent.com/60444937/126654115-c21c6cb0-1bbe-42ee-9ac5-5e052430ff96.PNG)
