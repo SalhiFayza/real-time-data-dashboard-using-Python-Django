@@ -154,3 +154,9 @@ This interface displays the different curves of aquaponics data (humidity, tempe
 ![95](https://user-images.githubusercontent.com/60444937/126654082-dff74bf4-329c-4292-937b-f0b225b824c8.PNG)
 ![96](https://user-images.githubusercontent.com/60444937/126654103-d7fa1926-f518-4815-9a0d-64bd69beef23.PNG)
 ![5](https://user-images.githubusercontent.com/60444937/126654662-95d792a4-c989-4ba2-bc44-d77b60f7541d.PNG)
+
+* Part 4: Settings:
+
+This interface allows the administrator to change the temperature threshold according to the studies carried out and the ambient temperature in aquaponics.
+
+![a](https://user-images.githubusercontent.com/60444937/126655048-ccfd0da4-69b7-4f18-b6f3-dab8eb657609.PNG)
