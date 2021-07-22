@@ -110,6 +110,4 @@ whitenoise==5.0.1
 
 * Part 1: Authentification with SQLite(data base Django). 
 
-![90](https://user-images.githubusercontent.com/60444937/126646643-703fe89e-12b1-4cd4-acb7-666d6b1fb06a.PNG)
-
-![91](https://user-images.githubusercontent.com/60444937/126646628-2ce52d36-41cd-4e55-aa1f-b4a17d8a417c.PNG)
+![90](https://user-images.githubusercontent.com/60444937/126646643-703fe89e-12b1-4cd4-acb7-666d6b1fb06a.PNG)![91](https://user-images.githubusercontent.com/60444937/126646628-2ce52d36-41cd-4e55-aa1f-b4a17d8a417c.PNG)
