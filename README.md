@@ -43,7 +43,7 @@ Web server using an "Arduino UNO+Raspberry Pi" and DHT22, DS18B20, Pro SKU SEN01
 
 # Django codebase structure
 
-< PROJECT ROOT >
+                    < PROJECT ROOT >
    |
    |-- core/                               # 
    |    |-- static/                        #  
@@ -81,7 +81,7 @@ Web server using an "Arduino UNO+Raspberry Pi" and DHT22, DS18B20, Pro SKU SEN01
    |-- manage.py                           # Start the app 
    |
    |-- *********************************************************
-
+   
 # Create Account Firebase.
 
 - Create account 
