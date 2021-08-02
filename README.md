@@ -41,6 +41,47 @@ Web server using an "Arduino UNO+Raspberry Pi" and DHT22, DS18B20, Pro SKU SEN01
 
 - python manage.py migrate posts.
 
+# Django codebase structure
+
+< PROJECT ROOT >
+   |
+   |-- core/                               # 
+   |    |-- static/                        #  
+   |    |    |-- <css, JS, images>         # CSS files
+   |    |
+   |    |-- templates/                     # Templates
+   |         |
+   |         |-- includes/                 # HTML 
+   |         |    |-- navigation.html      # Top menu component
+   |         |    |-- sidebar.html         # Sidebar component
+   |         |    |-- footer.html          # App Footer
+   |         |    |-- scripts.html         # JS Scripts 
+   |         |
+   |         |-- layouts/                  # Master pages
+   |         |    |-- base-fullscreen.html # 
+   |         |    |-- base.html            # 
+   |         |
+   |         |-- accounts/                 # Authentication pages
+   |         |    |-- login.html           # Login page
+   |         |    |-- register.html        # Register page
+   |         |
+   |      index.html                       # The default page
+   |     page-404.html                     # Error 404 page
+   |     page-500.html                     # Error 404 page
+   |       *.html                          # All other HTML pages
+   |
+   |-- authentication/                     # Handles auth routes
+   |
+   |-- app/                                # Serve HTML files
+   |    
+   |
+   |-- requirements.txt                    # App Dependencies
+   |
+   |-- .env                                # Inject Environment 
+   |-- manage.py                           # Start the app 
+   |
+   |-- *********************************************************
+
 # Create Account Firebase.
 
 - Create account 
